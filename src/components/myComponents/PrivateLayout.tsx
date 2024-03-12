@@ -6,7 +6,7 @@ import axios from "axios";
 import { SetCurrentUser } from "@/redux/UsersSlice";
 import { SetLoading } from "@/redux/LoadersSlice";
 import { Badge, Popover, message } from "antd";
-import { useRouter } from "next/navigation";
+import { useRouter ,redirect } from "next/navigation";
 import { getCatchErrorMessage } from "@/helpers/ErrorMessgaes";
 
 function PrivateLayout({ children }: { children: React.ReactNode }) {
@@ -20,7 +20,9 @@ function PrivateLayout({ children }: { children: React.ReactNode }) {
     try {
       dispatch(SetLoading(true));
       const response = await axios.get("/api/auth/current_user");
+      
       dispatch(SetCurrentUser(response.data.data));
+      console.log("curentuser-->>>>" , currentUser ,response.data.data)
     } catch (error: unknown) {
       router.push("/auth/login");
       message.error(getCatchErrorMessage(error));
@@ -69,7 +71,7 @@ function PrivateLayout({ children }: { children: React.ReactNode }) {
         }}
       >
         <i className="ri-user-line text-xl"></i>
-        <span>Profile</span>
+        <span>{currentUser?.isAdmin ? "Admin" : "User"}</span>
       </div>
 
       <div
@@ -81,6 +83,13 @@ function PrivateLayout({ children }: { children: React.ReactNode }) {
       </div>
     </div>
   );
+
+
+  if (currentUser && !currentUser?.isAdmin) {
+    redirect("/");
+  }
+
+
 
   return (
     currentUser && (

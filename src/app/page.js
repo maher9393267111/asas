@@ -93,7 +93,7 @@ const getTours = async () => {
 
     const endPoint = `${domain}/api/admin/tours?limit=true`;
     const response = await axios.get(endPoint);
-    console.log("RESPONSE TTTTTTTT📝📩🏷📒📕💡📝📩🏷📒📕💡📝📩🏷📒📕💡T", response.data.data);
+    //console.log("RESPONSE TTTTTTTT📝📩🏷📒📕💡📝📩🏷📒📕💡📝📩🏷📒📕💡T", response.data.data);
 
     return response.data.data || [];
   } catch (error) {
@@ -148,7 +148,7 @@ export default async function Home() {
   // const toursData = await getTours() 
  
   
-  console.log("RESPONSE TTTTTTTT📝📩🏷📒📕💡📝📩🏷📒📕💡📝📩🏷📒📕💡TTTTTT", toursData);
+  //console.log("RESPONSE TTTTTTTT📝📩🏷📒📕💡📝📩🏷📒📕💡📝📩🏷📒📕💡TTTTTT", toursData);
 
   return (
     <>

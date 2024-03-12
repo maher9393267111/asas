@@ -291,7 +291,7 @@ export async function POST(req) {
 
     const mailOptions = {
       from: email,
-      to: "basma94ghanem@gmail.com",
+      to: ["basma94ghanem@gmail.com" ,reqBody.email],
       subject: `Message from ${name}`,
       subject: `Contact Message from ${email}`,
       html: htmTemplate,

@@ -8,8 +8,10 @@ export function middleware(request: NextRequest) {
     {
       const token = request.cookies.get("token")?.value;
       const { pathname } = request.nextUrl;
+      // const decodedToken: any = jwt.verify(token, process.env.jwt_secret || "");
+      //  const userId = decodedToken;
 
-      //  console.log(token , "toKENNNNN")
+      //   console.log(token , "toKEN  🙄  🙄  🙄  🙄NNN" ,userId)
       const isAuthPage =
         pathname === "/auth/login" || pathname === "/auth/register";
 
