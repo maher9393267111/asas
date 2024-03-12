@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
       // const decodedToken: any = jwt.verify(token, process.env.jwt_secret || "");
       //  const userId = decodedToken;
 
-      //   console.log(token , "toKEN  🙄  🙄  🙄  🙄NNN" ,userId)
+      //   console.log(token , "toKEN  🙄  🙄 1245673 🙄  🙄NNN" ,userId)
       const isAuthPage =
         pathname === "/auth/login" || pathname === "/auth/register";
 
