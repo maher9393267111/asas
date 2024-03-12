@@ -282,7 +282,7 @@ export async function POST(req) {
 
 <footer style="text-align: center; padding: 5px 0; color: #000; font-size: 1rem;">
 <h2>Julia Tours</h2>
-<p>© ${defaultYear} All rights reserved</p>
+<p>© ${defaultYear} All rights reserveddd</p>
 </footer>
 </body>
 
