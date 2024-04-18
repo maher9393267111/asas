@@ -30,6 +30,7 @@ import Banner1 from "@/components/banner/Banner1";
  import FlightHome from '@/components/myComponents/HomeComponents/FlightsHome'
  import GoogleReviews from   '@/components/myComponents/HomeComponents/reviews'
 import { RemoveItemFromCart } from "@/redux/CartSlice";
+import BannerService from "@/components/myComponents/BannerService";
 
 export const metadata = {
   title: " juliaTours - Tour & Travel Agency",
@@ -154,7 +155,9 @@ export default async function Home() {
     <>
       <HeaderSite />
 
-      <Banner1 data={flightData} />
+      {/* <Banner1 data={flightData} /> */}
+      
+      <BannerService data={flightData} />
 
       <FilterComponent />
 
