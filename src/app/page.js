@@ -157,9 +157,9 @@ export default async function Home() {
     <>
       <HeaderSite />
 
-      {/* <Banner1 data={flightData} /> */}
+      <Banner1 data={flightData} />
 
-      <BannerService data={flightData} />
+      {/* <BannerService data={flightData} /> */}
 
       <FilterComponent />
 
