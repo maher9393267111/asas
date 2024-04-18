@@ -184,8 +184,9 @@ const Page = () => {
 
   return (
     <>
-      <Breadcrumb pagename="تفاصيل الغرفة" pagetitle="تفاصيل الغرفة" />
-
+    {hotel?.images &&
+      <Breadcrumb img={hotel?.images[0]} pagename="تفاصيل الغرفة" pagetitle="تفاصيل الغرفة" />
+    }
       {hotel && (
         <div className="room-details-area pt-120 mb-120 !font-kufi">
           <div className="container">

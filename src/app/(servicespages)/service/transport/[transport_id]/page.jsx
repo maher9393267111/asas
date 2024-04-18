@@ -201,7 +201,14 @@ const Page = () => {
   }, []);
   return (
     <>
-      <Breadcrumb pagename="تفاصيل التنقل" pagetitle="تفاصيل التنقل" />
+      {/* <Breadcrumb pagename="تفاصيل التنقل" pagetitle="تفاصيل التنقل" /> */}
+
+      {trans?.images &&
+      <Breadcrumb img={trans?.images[0]} pagename="تفاصيل التنقل" pagetitle="تفاصيل التنقل" />
+    }
+
+
+
 
       {trans && (
         <div className="transport-details-section pt-120 mb-120">

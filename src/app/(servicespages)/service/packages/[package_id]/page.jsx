@@ -182,7 +182,12 @@ const Page = () => {
   }, []);
   return (
     <>
-      <Breadcrumb pagename="تفاصيل العرض" pagetitle="تفاصيل العرض" />
+      {/* <Breadcrumb pagename="تفاصيل العرض" pagetitle="تفاصيل العرض" /> */}
+      {trans?.images &&
+      <Breadcrumb img={trans?.images[0]} pagename="تفاصيل العرض" pagetitle="تفاصيل العرض" />
+    }
+
+
 
       {state.transportType}
       {trans && (

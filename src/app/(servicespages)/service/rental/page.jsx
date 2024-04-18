@@ -15,7 +15,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useRouter } from "next/navigation";
 import { CountriesAr } from "@/uitils/locations";
 import CarFilter from "../_components/RentalCarFilter";
-
+import BannerService from "../../../../components/myComponents/BannerService";
 const INIT_CHECKBOXES_VALUES = {
   type: false,
   vites: false,
@@ -30,6 +30,7 @@ const INIT_CHECKBOXES_VALUES = {
 export default function HotelsServices() {
   const dispatch = useDispatch();
   const [rentals, setRentals] = useState([]);
+  const [banners, setBanners] = useState([]);
   const [title, setTitle] = useState("");
 
   const [checkboxes, setCheckboxes] = useState(INIT_CHECKBOXES_VALUES);
@@ -74,6 +75,39 @@ export default function HotelsServices() {
     getHotels();
   }, [checkboxes]);
 
+
+
+
+  const getBanners = async () => {
+    try {
+      dispatch(SetLoading(true));
+
+    
+        const response = await axios.get(
+          `/api/admin/flights?service=package&&limit=true`
+        );
+
+        setBanners(response.data.data);
+        console.log("REsponse-->", response.data.data);
+      
+    
+    } catch (error) {
+      message.error(getCatchErrorMessage(error));
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
+
+  useEffect(() => {
+   
+    getBanners();
+  }, []);
+
+
+
+
+
   const locations = ["istanbul", "bursa", "trabzon", "izmir", "izmit"];
 
   const onChange = (e, fieldName) => {
@@ -99,14 +133,21 @@ export default function HotelsServices() {
 
 
 
+
+
   
   return (
     <div>
-      <Breadcrumb
+      {/* <Breadcrumb
         img="https://triprex-nextjs-rtl.vercel.app/assets/img/innerpage/inner-banner-bg.png"
         pagename="Hotels"
         pagetitle="Hotels"
-      />
+      /> */}
+
+{banners?.length > 0 &&
+
+<BannerService data={banners} />
+}
 
       <div className="container my-6">
         <div className="row g-lg-4 gy-5">

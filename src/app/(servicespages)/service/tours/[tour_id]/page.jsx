@@ -142,7 +142,13 @@ const Page = () => {
 
   return (
     <>
-      <Breadcrumb pagename="تفاصيل الرحلة" pagetitle="تفاصيل الرحلة" />
+      {/* <Breadcrumb pagename="تفاصيل الرحلة" pagetitle="تفاصيل الرحلة" /> */}
+
+ 
+      {tour?.images &&
+      <Breadcrumb img={tour?.images[0]}  pagename="تفاصيل الرحلة" pagetitle="تفاصيل الرحلة" />
+    }
+
 
       {tour && (
         <div className="package-details-area pt-120 mb-120 position-relativ !font-kufi">
