@@ -53,8 +53,8 @@ function FlightList() {
     },
 
     {
-      title: "Price",
-      dataIndex: "price",
+      title: "Service",
+      dataIndex: "service",
     },
 
     {
