@@ -42,7 +42,7 @@ export const metadata = {
 };
 
 
-const REACT_APP_BASE_URL1 = "https://julia-travel97.vercel.app";
+const REACT_APP_BASE_URL1 = "https://julia-travel2.vercel.app/";
 const REACT_APP_BASE_URL = "http://localhost:3000";
 
 const domain = 
