@@ -11,6 +11,7 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import VisaCard from '../_components/VisaCard'
+import BannerService from "../../../../components/myComponents/BannerService";
 
 const page = () => {
 
@@ -18,6 +19,7 @@ const page = () => {
 
     const dispatch = useDispatch();
     const [visas, setVisas] = useState([]);
+    const [banners, setBanners] = useState([]);
   
     const searchParams = useSearchParams();
   
@@ -47,12 +49,51 @@ const page = () => {
   
   
 
+    
+ 
+  const getBanners = async () => {
+    try {
+      dispatch(SetLoading(true));
+
+    
+        const response = await axios.get(
+          `/api/admin/flights?service=visa&&limit=true`
+        );
+
+        setBanners(response.data.data);
+        console.log("REsponse-->", response.data.data);
+      
+    
+    } catch (error) {
+      message.error(getCatchErrorMessage(error));
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
+
+  useEffect(() => {
+   
+    getBanners();
+  }, []);
+
+
+
+
+
 
 
 
   return (
     <>
-      <Breadcrumb pagename="الفيزا" pagetitle="الفيزا" />
+      {/* <Breadcrumb pagename="الفيزا" pagetitle="الفيزا" /> */}
+
+
+      {banners?.length > 0 &&
+
+<BannerService data={banners} />
+}
+
       <div className="package-search-filter-wrapper">
         <div className="container">
            

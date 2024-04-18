@@ -109,7 +109,7 @@ function FlightList() {
             setSelectedCategory(undefined);
           }}
         >
-          Add Flight
+          Add Banner
         </Button>
       </div>
 

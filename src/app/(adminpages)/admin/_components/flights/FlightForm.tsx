@@ -30,6 +30,8 @@ const modules = {
 
 const locations = ["istanbul", "bursa", "trabzon", "izmir", "izmit"];
 
+const services= ["hotel", "visa", "car", "transport", "tour" ,"package" ,"flight"];
+
 function FlightForm({
   showCategoryForm,
   setShowCategoryForm,
@@ -92,7 +94,7 @@ function FlightForm({
 
   console.log("S?????", selectedCategory);
 
-  const modelTitle = selectedCategory ? "Edit Flight" : "Add Flight";
+  const modelTitle = selectedCategory ? "Edit Banner" : "Add Banner";
   return (
     <Modal
       title={<ModelTitle title={modelTitle} />}
@@ -129,16 +131,45 @@ function FlightForm({
         </Form.Item>
 
    
+   
+        <Form.Item
+          label="Service"
+          name="service"
+          rules={[
+            {
+              required: true,
+              message: "Please input service name",
+            },
+          ]}
+        >
+      
+      <select className="input_style w-full py-2" value={""}>
+            <option value="">Select Service</option>
+            {services.map((location: any, index: any) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
+          </select>
+
+
+
+
+        </Form.Item>
+
+
+
 
         <div className="col-span-3">
           <Upload
             accept="image/*"
-            // multiple
+             
             beforeUpload={(file) => {
               setFiles((prev: any) => [...prev, file]);
               return false;
             }}
             listType="picture-card"
+            maxCount={1}
           >
             Upload Images
           </Upload>

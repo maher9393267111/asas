@@ -56,7 +56,7 @@ function AdminProfile() {
           <TourList />
         </Tabs.TabPane>
 
-        <Tabs.TabPane tab="flights" key="7">
+        <Tabs.TabPane tab="banners" key="7">
           <FlightList />
         </Tabs.TabPane>
 

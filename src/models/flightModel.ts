@@ -4,7 +4,7 @@ const flightSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required:false,
     },
     description: {
       type: String,
@@ -15,6 +15,14 @@ const flightSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+
+    
+    service: {
+      type: String,
+      required: false,
+    },
+
+
     isActive: {
       type: Boolean,
       default: true,

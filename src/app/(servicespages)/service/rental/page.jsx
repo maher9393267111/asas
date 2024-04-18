@@ -95,6 +95,11 @@ export default function HotelsServices() {
     window.location.reload();
   };
 
+
+
+
+
+  
   return (
     <div>
       <Breadcrumb

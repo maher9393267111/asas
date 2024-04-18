@@ -23,11 +23,12 @@ import {
   gorgiaCities,
 } from "@/uitils/locations";
 import LocationFilterCards from "../_components/LocationFilterCards";
-
+ import BannerService from "../../../../components/myComponents/BannerService";
 export default function HotelsServices() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [hotels, setHotels] = useState([]);
+  const [banners, setBanners] = useState([]);
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [searchtitle, setSearchTitle] = useState("");
 
@@ -74,6 +75,40 @@ export default function HotelsServices() {
     getHotels();
   }, [location, all, roomType, title, checkedBrands]);
 
+
+
+  const getBanners = async () => {
+    try {
+      dispatch(SetLoading(true));
+
+    
+        const response = await axios.get(
+          `/api/admin/flights?service=hotel&&limit=true`
+        );
+
+        setBanners(response.data.data);
+        console.log("REsponse-->", response.data.data);
+      
+    
+    } catch (error) {
+      message.error(getCatchErrorMessage(error));
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
+
+  
+  useEffect(() => {
+    getHotels();
+    getBanners();
+  }, [location, all, roomType, title, checkedBrands]);
+
+
+
+
+
+
   const currentCities =
     location && location === "تركيا"
       ? turkeyCities
@@ -110,11 +145,18 @@ export default function HotelsServices() {
 
   return (
     <div>
-      <Breadcrumb
+      
+      {/* <Breadcrumb
         img="https://triprex-nextjs-rtl.vercel.app/assets/img/innerpage/inner-banner-bg.png"
         pagename="Hotels"
         pagetitle="Hotels"
-      />
+      /> */}
+
+
+{banners?.length > 0 &&
+
+<BannerService data={banners} />
+}
 
       <div className="room-suits-page pt-120 mb-120">
         <div className="container">

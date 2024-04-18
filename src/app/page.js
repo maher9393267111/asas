@@ -108,7 +108,7 @@ const getFlights = async () => {
   try {
     // const domain = "http://localhost:3000/api/admin/visa";
 
-    const endPoint = `${domain}/api/admin/flights?limit=true`;
+    const endPoint = `${domain}/api/admin/flights?service=flight&&limit=true`;
     const response = await axios.get(endPoint);
     //console.log("RESPONSE", response.data.data);
     return response.data.data || [];

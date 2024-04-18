@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
     const url = new URL(req.url);
     // const person = url.searchParams.get("person");
-
+    const service = url.searchParams.get("service");
     const from = url.searchParams.get("from");
     const to = url.searchParams.get("to");
     const limit = url.searchParams.get("limit");
@@ -24,6 +24,13 @@ export async function GET(req: NextRequest) {
     // if (person) {
     //   filter.person = Number(person);
     // }
+
+    console.log("service---->>" ,service)
+
+    if (service) {
+      filter.service = service;
+    }
+
 
     if (from) {
       filter.from = from;

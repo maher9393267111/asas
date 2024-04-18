@@ -23,6 +23,7 @@ import {
   busnaCities,
   gorgiaCities,
 } from "@/uitils/locations";
+import BannerService from "../../../../components/myComponents/BannerService";
 
 
 // export const metadata = {
@@ -38,6 +39,7 @@ const page = () => {
   const dispatch = useDispatch();
   const [packagess, setPackages] = useState([]);
   const [checkedBrands, setCheckedBrands] = useState([]);
+  const [banners, setBanners] = useState([]);
   const [searchtitle, setSearchTitle] = useState("");
   const router = useRouter();
 
@@ -82,8 +84,39 @@ const page = () => {
       dispatch(SetLoading(false));
     }
   };
+
+
+  const getBanners = async () => {
+    try {
+      dispatch(SetLoading(true));
+
+    
+        const response = await axios.get(
+          `/api/admin/flights?service=package&&limit=true`
+        );
+
+        setBanners(response.data.data);
+        console.log("REsponse-->", response.data.data);
+      
+    
+    } catch (error) {
+      message.error(getCatchErrorMessage(error));
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
+
+  useEffect(() => {
+   
+    getBanners();
+  }, []);
+
+
+
   useEffect(() => {
     getPackages();
+    getBanners();
   }, [all, from, type, person, child, location ,checkedBrands]);
 
 
@@ -124,7 +157,13 @@ const page = () => {
 
   return (
     <>
-      <Breadcrumb pagename="العروض" pagetitle="العروض" />
+      {/* <Breadcrumb pagename="العروض" pagetitle="العروض" /> */}
+
+      {banners?.length > 0 &&
+
+<BannerService data={banners} />
+}
+
 
       <LocationFilterCards link={"packages"} searckey={"location"} />
 

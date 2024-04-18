@@ -25,6 +25,7 @@ import {
 
 import DiscountSlider from "../_components/DiscountSliderTour";
 import LocationFilterCards from "../_components/LocationFilterCards";
+import BannerService from "../../../../components/myComponents/BannerService";
 
 const page = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const page = () => {
   const [tours, setTours] = useState([]);
   const [searchtitle, setSearchTitle] = useState("");
   const [checkedBrands, setCheckedBrands] = useState([]);
+  const [banners, setBanners] = useState([]);
 
   const searchParams = useSearchParams();
   const all = searchParams.get("all");
@@ -66,9 +68,45 @@ const page = () => {
       dispatch(SetLoading(false));
     }
   };
+
+
   useEffect(() => {
     getTours();
   }, [country, city, type, all, checkedBrands]);
+
+
+
+  const getBanners = async () => {
+    try {
+      dispatch(SetLoading(true));
+
+    
+        const response = await axios.get(
+          `/api/admin/flights?service=tour&&limit=true`
+        );
+
+        setBanners(response.data.data);
+        console.log("REsponse-->", response.data.data);
+      
+    
+    } catch (error) {
+      message.error(getCatchErrorMessage(error));
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
+
+  useEffect(() => {
+   
+    getBanners();
+  }, []);
+
+
+
+
+
+
 
   const currentCities =
     country && country === "تركيا"
@@ -79,7 +117,7 @@ const page = () => {
       ? emiratesCities
       : country === "أذربيجان"
       ? azerbicanCities
-      : location === "البوسنة والهرسك"
+      : country === "البوسنة والهرسك"
       ? busnaCities
       : [];
 
@@ -100,7 +138,12 @@ const page = () => {
 
   return (
     <>
-      <Breadcrumb pagename="الرحلات" pagetitle="الرحلات" />
+      {/* <Breadcrumb pagename="الرحلات" pagetitle="الرحلات" /> */}
+
+      {banners?.length > 0 &&
+
+<BannerService data={banners} />
+}
 
       <LocationFilterCards link={"tours"} searckey={"country"} />
 

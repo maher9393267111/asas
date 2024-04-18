@@ -15,7 +15,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import TransportCard from "../_components/TransportCard";
 import DiscountSlider from "../_components/DiscountTransportSlider";
-
+import BannerService from "../../../../components/myComponents/BannerService";
 
 // export const metadata = {
 //   title: "TripRex - Tour & Travel Agency  NextJs Template",
@@ -29,7 +29,7 @@ import DiscountSlider from "../_components/DiscountTransportSlider";
 const page = () => {
   const dispatch = useDispatch();
   const [transports, setTransports] = useState([]);
- 
+  const [banners, setBanners] = useState([]);
 
   const searchParams = useSearchParams();
 
@@ -59,15 +59,52 @@ const page = () => {
 
 
  
+  const getBanners = async () => {
+    try {
+      dispatch(SetLoading(true));
+
+    
+        const response = await axios.get(
+          `/api/admin/flights?service=transport&&limit=true`
+        );
+
+        setBanners(response.data.data);
+        console.log("REsponse-->", response.data.data);
+      
+    
+    } catch (error) {
+      message.error(getCatchErrorMessage(error));
+    } finally {
+      dispatch(SetLoading(false));
+    }
+  };
+
+
+  useEffect(() => {
+   
+    getBanners();
+  }, []);
+
 
 
 
 
   return (
     <>
-      <Breadcrumb pagename="النقليات" pagetitle="النقليات" />
+      {/* <Breadcrumb pagename="النقليات" pagetitle="النقليات" /> */}
 
-      <div className="transport-page pt-120 mb-120">
+      {banners?.length > 0 &&
+
+<BannerService data={banners} />
+
+}
+
+
+
+
+
+
+      <div className="transport-page pt-[24] mb-120">
         <div className="container">
           { to || from || all ? (
             <div className="row g-lg-4 gy-5">
