@@ -25,39 +25,34 @@ import FilterComponent from "@/components/myComponents/HomeComponents/Filter";
 import HomeVisa from "@/components/myComponents/HomeComponents/VisaSlider";
 import HomeHotels from "@/components/myComponents/HomeComponents/HotelsHome";
 import Banner1 from "@/components/banner/Banner1";
- import ToursHome from '@/components/myComponents/HomeComponents/ToursHome'
- import TransportHome from '@/components/myComponents/HomeComponents/TransportHome'
- import FlightHome from '@/components/myComponents/HomeComponents/FlightsHome'
- import GoogleReviews from   '@/components/myComponents/HomeComponents/reviews'
+import ToursHome from "@/components/myComponents/HomeComponents/ToursHome";
+import TransportHome from "@/components/myComponents/HomeComponents/TransportHome";
+import FlightHome from "@/components/myComponents/HomeComponents/FlightsHome";
+import GoogleReviews from "@/components/myComponents/HomeComponents/reviews";
 import { RemoveItemFromCart } from "@/redux/CartSlice";
 import BannerService from "@/components/myComponents/BannerService";
 
 export const metadata = {
   title: " juliaTours - Tour & Travel Agency",
-  description:
-    "juliaTours - Tour & Travel Agency ",
+  description: "juliaTours - Tour & Travel Agency ",
   icons: {
-    icon:"/assets/img/julia-png.png",
+    icon: "/assets/img/julia-png.png",
   },
 };
-
 
 const REACT_APP_BASE_URL1 = "https://julia-travel2.vercel.app/";
 const REACT_APP_BASE_URL = "http://localhost:3000";
 
-const domain = 
-process.env.NODE_ENV === "development"
-?  REACT_APP_BASE_URL
-:
- REACT_APP_BASE_URL1
-
+const domain =
+  process.env.NODE_ENV === "development"
+    ? REACT_APP_BASE_URL
+    : REACT_APP_BASE_URL1;
 
 //REACT_APP_BASE_URL
 
 //  !process.env.NODE_ENV === "development"
 //   ? REACT_APP_BASE_URL1
 //     : REACT_APP_BASE_URL;
-
 
 const getVisa = async () => {
   try {
@@ -106,7 +101,6 @@ const getTours = async () => {
   }
 };
 
-
 const getFlights = async () => {
   try {
     // const domain = "http://localhost:3000/api/admin/visa";
@@ -121,9 +115,6 @@ const getFlights = async () => {
   } finally {
   }
 };
-
-
-
 
 const getTransport = async () => {
   try {
@@ -141,16 +132,17 @@ const getTransport = async () => {
   }
 };
 
-
-
-
 export default async function Home() {
-  const [visaData, hotelsData, toursData , transportData ,flightData] = await Promise.all([ getVisa(),getHotels(),getTours(), getTransport()
-  , getFlights()
-  ]);
-  // const toursData = await getTours() 
- 
-  
+  const [visaData, hotelsData, toursData, transportData, flightData] =
+    await Promise.all([
+      getVisa(),
+      getHotels(),
+      getTours(),
+      getTransport(),
+      getFlights(),
+    ]);
+  // const toursData = await getTours()
+
   //console.log("RESPONSE TTTTTTTT📝📩🏷📒📕💡📝📩🏷📒📕💡📝📩🏷📒📕💡TTTTTT", toursData);
 
   return (
@@ -163,26 +155,17 @@ export default async function Home() {
 
       <FilterComponent />
 
-<div className=" container">
+      <div className=" container">
+        <HomeHotels hotels={hotelsData} />
 
+        <ToursHome tours={toursData} />
+        <TransportHome transports={transportData} />
+        {/* <FlightHome flights={flightData}/> */}
 
+        <HomeVisa visaData={visaData} />
 
-      <HomeHotels hotels={hotelsData} />
-
-      <ToursHome tours={toursData}/>
-      <TransportHome transports={transportData}/>
-      {/* <FlightHome flights={flightData}/> */}
-
-      <HomeVisa visaData={visaData} />
-
-
-      <GoogleReviews />
-
-
-    
-
+        <GoogleReviews />
       </div>
-
 
       {/* <Topbar2 /> */}
       {/* <Header /> */}
